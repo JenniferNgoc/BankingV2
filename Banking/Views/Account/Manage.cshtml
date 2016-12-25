@@ -1,0 +1,50 @@
+﻿@model Banking.ViewModels.AccountViewModels.ManageViewModel
+@{
+    ViewData["Title"] = "Manage Transaction";
+}
+
+<h2>@ViewData["Title"].</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Transaction No.</th>
+        <th>Transaction Type</th>
+        <th>Amount</th>
+        <th>Start Balance</th>
+        <th>End Balance</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model.UserTransactions)
+    {
+        <tr>
+            <td>@item.TransactionNo</td>
+            <td>
+            @if (@item.TransactionType==1)
+            {
+                <p>Deposit</p>
+            }
+            else
+            {
+                <p>Withdraw</p>
+            } 
+            </td>
+            <td>
+                @if (@item.TransactionType == 1)
+                {
+                    <span>+</span>
+                }
+                else
+                {
+                    <span>-</span>
+                } 
+                @item.Amount.Value.ToString("C")
+            </td>
+            <td>@item.StartBalance.Value.ToString("C")</td>
+            <td>@item.EndBalance.Value.ToString("C")</td>
+        </tr>
+    }
+    </tbody>
+</table>
